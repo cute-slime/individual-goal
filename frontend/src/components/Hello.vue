@@ -25,7 +25,7 @@
     name: 'hello',
     data () {
       return {
-        msg: '어서와 Vue.js는 처음이지?'
+        msg: '어서와 Vue.js는 처음이지?!'
       }
     }
   }
