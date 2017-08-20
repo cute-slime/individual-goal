@@ -1,15 +1,32 @@
 <template>
   <div class="feed_list">
-    <span>어서 피드 리스트를 그리자~</span>
+    <div v-for="item in items">
+      {{item.description}}
+    </div>
   </div>
 </template>
 
 <script>
   export default {
     name: 'FeedList',
+    components: {},
     data () {
       return {
-        msg: '어서와 Vue.js는 처음이지?!'
+        apiEndpoint: 'http://localhost:8081/',
+        version: 'v1.0',
+        api: 'feed',
+        items: [{description: 'test'}, {description: 'is'}, {description: 'wandaful'}]
+      }
+    },
+    mounted: function () {
+      this.fetchData()
+    },
+    watch: {
+      $route: 'fetchData'
+    },
+    methods: {
+      fetchData () {
+        console.log('요기서 fetch api data!')
       }
     }
   }
