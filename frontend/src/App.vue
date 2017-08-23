@@ -19,3 +19,4 @@
     margin-top: 60px;
   }
 </style>
+<style src="../bower_components/font-awesome/css/font-awesome.min.css"></style>

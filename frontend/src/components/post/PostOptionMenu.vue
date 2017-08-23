@@ -1,12 +1,12 @@
 <template>
-  <div class="">
-  </div>
+  <i class="fa fa-ellipsis-v"/>
 </template>
 
 <script>
   export default {
     name: 'PostOptionMenu',
     data () {
+      return {}
     }
   }
 </script>

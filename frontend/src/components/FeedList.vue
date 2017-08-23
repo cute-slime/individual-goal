@@ -1,10 +1,10 @@
 <template>
   <div class="feed">
     <article class="post" v-for="item in items" :key="item.id">
-      <!--<PostOptionMenu/>-->
-      <!--<UserProfile/>-->
+      <PostOptionMenu class="post__option-menu"></PostOptionMenu>
+      <UserProfile></UserProfile>
       <p id="p-body" class="post__body">{{item.message}}</p>
-      <!--<Multimedia id="div-media" class="post__media" data={this.props.data}  onGalleryEntryClick={(e)=>this.onClick(e)}/>-->
+      <!--<Multimedia id="div-media" class="post__media"/>-->
       <div>
         <div id="div-interaction" class="post__interaction">
           <span><strong>{{item.likes.summary.total_count}}</strong></span> <span>Like</span> <span><em>{{item.comments.summary.total_count}}</em> Comment</span> <span>Share</span>
@@ -14,18 +14,21 @@
         </p>
       </div>
       <ul id="ul-post-actionbar" class="post__action">
-        <li class="post__action__item"><a href="#"><i class="fa fa-thumbs-o-up"/><span>좋아요</span></a></li>
-        <li class="post__action__item"><a href="#"><i class="fa fa-commenting"/><span>댓글 달기</span></a></li>
-        <li class="post__action__item"><a href="#"><i class="fa fa-share-alt"/><span>공유하기</span></a></li>
+        <li class="post__action__item"><a href="#"><i class="fa fa-thumbs-o-up"></i><span> 좋아요</span></a></li>
+        <li class="post__action__item"><a href="#"><i class="fa fa-commenting"></i><span> 댓글 달기</span></a></li>
+        <li class="post__action__item"><a href="#"><i class="fa fa-share-alt"></i><span> 공유하기</span></a></li>
       </ul>
     </article>
   </div>
 </template>
 
 <script>
+  import PostOptionMenu from './post/PostOptionMenu'
+  import UserProfile from './post/UserProfile'
+
   export default {
     name: 'FeedList',
-    components: {},
+    components: {PostOptionMenu, UserProfile},
     data () {
       return {
         apiEndpoint: 'http://localhost:8081/',
@@ -102,12 +105,28 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .post {
-    margin: auto;
     width: 500px;
     position: relative;
     border: 1px solid #ccc;
+    margin: auto;
     margin-bottom: 20px;
     background-color: white;
+  }
+
+  .post__option-menu {
+    margin-right: 16px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 8px;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .post__media {
+    margin-left: 10px;
+    margin-right: 10px;
+    box-sizing: border-box;
   }
 
   .post__body {
@@ -144,10 +163,9 @@
     border-top-color: rgb(229, 229, 229);
     border-top-style: solid;
     border-top-width: 1px;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
     text-align: left;
+    padding: 0;
+    margin: 12px 12px 4px 24px;
   }
 
   .post__action > li:first-child {
