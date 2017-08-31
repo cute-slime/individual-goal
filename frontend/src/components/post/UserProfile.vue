@@ -5,11 +5,11 @@
     </div>
     <div class="profile">
       <p style="margin-bottom: 0;">
-        <span id="spn-user-name" class="profile__name">이름</span>
+        <span id="spn-user-name" class="profile__name">{{name}}</span>
       </p>
       <p class="profile__date">
-        <span id="spnDate">yyyy. MM. dd</span> ·
-        <span class="profile__right__icon">아이콘</span>
+        <span id="spnDate">{{updated_time}}</span> ·
+        <span class="profile__right__icon"><i class="fa fa-globe"></i></span>
       </p>
     </div>
   </div>
@@ -18,6 +18,7 @@
 <script>
   export default {
     name: 'UserProfile',
+    props: ['name', 'updated_time'],
     data () {
       return {}
     }

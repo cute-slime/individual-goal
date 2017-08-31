@@ -1,5 +1,7 @@
 <template>
-  <i class="fa fa-ellipsis-v"/>
+  <div>
+    <i class="fa fa-ellipsis-v" v-on:click="aa"></i>
+  </div>
 </template>
 
 <script>
@@ -7,6 +9,11 @@
     name: 'PostOptionMenu',
     data () {
       return {}
+    },
+    methods: {
+      aa () {
+        this.$modal.show('dlg-post-option-menu', {})
+      }
     }
   }
 </script>

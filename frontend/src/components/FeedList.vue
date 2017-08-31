@@ -2,7 +2,7 @@
   <div class="feed">
     <article class="post" v-for="item in items" :key="item.id">
       <PostOptionMenu class="post__option-menu"></PostOptionMenu>
-      <UserProfile></UserProfile>
+      <UserProfile :name="item.from.name" :updated_time="item.updated_time"></UserProfile>
       <p id="p-body" class="post__body">{{item.message}}</p>
       <!--<Multimedia id="div-media" class="post__media"/>-->
       <div>
@@ -10,7 +10,7 @@
           <span><strong>{{item.likes.summary.total_count}}</strong></span> <span>Like</span> <span><em>{{item.comments.summary.total_count}}</em> Comment</span> <span>Share</span>
         </div>
         <p id="p-respond" class="post__respond">
-          <a class="post__respond__link">{{item.from.name}}님</a>이 좋아합니다.
+          <a class="post__respond__link">가나다라님</a>이 좋아합니다.
         </p>
       </div>
       <ul id="ul-post-actionbar" class="post__action">
@@ -19,12 +19,29 @@
         <li class="post__action__item"><a href="#"><i class="fa fa-share-alt"></i><span> 공유하기</span></a></li>
       </ul>
     </article>
+    <!--옵션 매뉴 팝업-->
+    <modal name="dlg-post-option-menu"
+           :width="300"
+           :height="300"
+           @before-open="beforeOpen"
+           @before-close="beforeClose">
+      <div class="box">
+        <button class="large-btn github-btn">수정</button>
+        <button class="large-btn facebook-btn">삭제</button>
+        <button class="large-btn facebook-btn">...</button>
+      </div>
+    </modal>
   </div>
 </template>
 
 <script>
+  import Vue from 'vue'
+  import VModal from 'vue-js-modal'
+
   import PostOptionMenu from './post/PostOptionMenu'
   import UserProfile from './post/UserProfile'
+
+  Vue.use(VModal, {})
 
   export default {
     name: 'FeedList',
@@ -37,6 +54,7 @@
         items: [
           {
             message: '집에 오는 길에서 만난 #개구리\n대빵 큼 !\n대려가서 어항에 키울까? ㅋㅋ\n#개구리 #방학천',
+            updated_time: '2017-07-09T15:16:11+0000',
             picture: 'https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/19905372_1578141822228048_5862932231829921537_n.jpg?oh=a70975952de33241e9bedb3a950c6205&oe=59EB96BD',
             from: {
               name: 'Jongmin Kim',
@@ -58,10 +76,51 @@
                 total_count: 1,
                 can_comment: true
               }
+            },
+            reactions: {
+              data: [
+                {
+                  id: '100003113836517',
+                  name: 'Sanggyu Kang',
+                  type: 'LIKE'
+                },
+                {
+                  id: '776649095714070',
+                  name: '유민재',
+                  type: 'LIKE'
+                },
+                {
+                  id: '646681288733069',
+                  name: 'Youn-Soo Son',
+                  type: 'LIKE'
+                },
+                {
+                  id: '784075601665128',
+                  name: 'Tae Yeol Kim',
+                  type: 'LIKE'
+                },
+                {
+                  id: '573848076077874',
+                  name: '정현박',
+                  type: 'LIKE'
+                },
+                {
+                  id: '511798038952836',
+                  name: '장현지',
+                  type: 'LIKE'
+                }
+              ],
+              paging: {
+                cursors: {
+                  before: 'TVRBd01EQXpNVEV6T0RNMk5URTNPakUwT1RrMk9EVXhNemM2TWpVME1EazJNVFl4TXc9PQZDZD',
+                  after: 'TVRBd01EQXpOamM1TXpRd05EZAzRPakUwT1RrMk1EZA3hNVEU2TWpVME1EazJNVFl4TXc9PQZDZD'
+                }
+              }
             }
           },
           {
             message: 'Test',
+            updated_time: '2017-07-09T15:16:11+0000',
             picture: 'https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/19905372_1578141822228048_5862932231829921537_n.jpg?oh=a70975952de33241e9bedb3a950c6205&oe=59EB96BD',
             from: {
               name: 'Jongmin Kim',
@@ -85,7 +144,9 @@
               }
             }
           }
-        ]
+        ],
+        time: 0,
+        duration: 5000
       }
     },
     mounted: function () {
@@ -97,6 +158,12 @@
     methods: {
       fetchData () {
         console.log('요기서 fetch api data!')
+      },
+      beforeOpen (event) {
+        console.log('test is')
+      },
+      beforeClose (event) {
+        console.log('right always')
       }
     }
   }
@@ -111,6 +178,7 @@
     margin: auto;
     margin-bottom: 20px;
     background-color: white;
+    text-align: left;
   }
 
   .post__option-menu {
